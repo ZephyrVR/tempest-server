@@ -1,0 +1,58 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  padding-top: 80px;
+  color: #FFFFFF;
+  background-color: #0d253a;
+}
+
+.title {
+  font-size: 8em;
+  font-family: 'Righteous';
+}
+
+.title-sm {
+  font-size: 4em;
+  font-family: 'Righteous';
+}
+
+.subtitle {
+  font-size: 2em;
+}
+
+.zephyr {
+  font-family: 'Righteous';
+}
+
+.steam-btn {
+  margin-top: 48px;
+}
+
+.install-info {
+  margin-top: 24px;
+}
+
+.info-containers {
+  margin-top: 48px;
+}
+
+.info-container {
+  word-wrap: break-word;
+}
+
+.app-unofficial {
+  color: #FF0000;
+}
+
+.app-verified {
+  color: #00FFFF;
+}
+
+.app-official {
+  color: #FFD700;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="msapplication-TileColor" content="#0d253a">
+    <meta name="msapplication-TileImage" content="/img/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#0d253a">
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/img/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicons/manifest.json">
+
+    <title>Zephyr</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+
+        <% if (infoMsgs.length > 0) { %>
+            <div class="alert alert-info" id="info-alert">
+                <%= infoMsgs %>
+            </div>
+        <% } %>
+
+        <% if (errorMsgs.length > 0) { %>
+            <div class="alert alert-danger" id="error-alert">
+                <%= errorMsgs %>
+            </div>
+        <% } %>
+
+        <div class="text-center">
+            <img src="<%= user.steam.avatar %>">
+            <h1 class="title-sm"><%= user.steam.name %></h1>
+            <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+            <p class="install-info">Login to the <span class="zephyr">Zephyr</span> overlay and app to get notifications in VR.<p>
+        </div>
+
+        <h3>Connected Apps</h3>
+        <% if(apps.length == 0) { %>
+            No connected apps.
+        <% } else { %>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th>App</th>
+                <th>Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < apps.length; i++) {%>
+                <tr>
+                    <td><%= apps[i].name %></td>
+                    <% if (apps[i].type == 0) { %>
+                        <td class="app-unverified"><span class="fa fa-warning" data-toggle="tooltip" data-placement="right" title="Unverified App"></span></td>
+                    <% } else if (apps[i].type == 1) { %>
+                        <td class="app-verified"><span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Verified App"></span></td>
+                    <% } else if (apps[i].type == 2) { %>
+                        <td class="app-official"><span class="fa fa-shield" data-toggle="tooltip" data-placement="right" title="Official App"></span></td>
+                    <% } %>
+                    <td><a class="btn btn-xs btn-danger" href="/revoke/<%= apps[i].id %>" data-toggle="tooltip" data-placement="right" title="Revoke access"><span class="fa fa-trash-o"></span></a></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% } %>
+
+        <%if (user.admin) { %>
+        <div class="row info-containers">
+            <div class="col-sm-6 info-container">
+                <h3><span class="fa fa-user"></span> Local</h3>
+                <p>
+                    <strong>id</strong>: <%= user._id %><br>
+                    <strong>email</strong>: <%= user.email %><br>
+                    <strong>admin</strong>: <%= user.admin %>
+                </p>
+
+                <%if (user.email == undefined) { %>
+                    Set your email to keep up to date with <span class="zephyr">Zephyr</span>.
+                <% } %>
+            </div>
+
+            <div class="col-sm-6 info-container">
+                <h3><span class="fa fa-steam"></span> Steam</h3>
+                <p>
+                    <strong>id</strong>: <%= user.steam.id %><br>
+                    <strong>name</strong>: <%= user.steam.name %><br>
+                    <strong>avatar</strong>: <%= user.steam.avatar %><br>
+                </p>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+
+$("#info-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#info-alert").slideUp(500);
+});
+
+$("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#error-alert").slideUp(500);
+});
+</script>
+</html>
