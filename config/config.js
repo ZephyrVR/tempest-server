@@ -1,20 +1,30 @@
+var fs = require('fs');
 var config = {};
 
-// Express
-config.port = process.env.PORT || 8080;
-config.expressLogging = process.env.EXPRESS_LOGGING || false;
+if (fs.existsSync(__dirname + '\\config-private.js')) {
+  console.log('Using private configuration file...');
+  config = require('./config-private');
+} else {
+  loadDefaults();
+}
 
-// Secrets
-config.sessionSecret = process.env.SESSION_SECRET || 'SESSION_SECRET';
-config.tokenSecret = process.env.TOKEN_SECRET || 'TOKEN_SECRET';
-config.jwtSecret = process.env.JWT_SECRET || 'JWT_SECRET';
+function loadDefaults() {
+  // Express
+  config.port = process.env.PORT || 8080;
+  config.expressLogging = process.env.EXPRESS_LOGGING || false;
 
-// Steam Passport
-config.steamReturnUrl = process.env.STEAM_RETURN_URL || 'STEAM_RETURN_URL';
-config.steamRealm = process.env.STEAM_REALM || 'STEAM_REALM';
-config.steamApiKey = process.env.STEAM_API_KEY || 'STEAM_API_KEY';
+  // Secrets
+  config.sessionSecret = process.env.SESSION_SECRET || 'SESSION_SECRET';
+  config.tokenSecret = process.env.TOKEN_SECRET || 'TOKEN_SECRET';
+  config.jwtSecret = process.env.JWT_SECRET || 'JWT_SECRET';
 
-// MongoDB
-config.dbUrl = process.env.DB_URL || 'DB_URL';
+  // Steam Passport
+  config.steamReturnUrl = process.env.STEAM_RETURN_URL || 'STEAM_RETURN_URL';
+  config.steamRealm = process.env.STEAM_REALM || 'STEAM_REALM';
+  config.steamApiKey = process.env.STEAM_API_KEY || 'STEAM_API_KEY';
+
+  // MongoDB
+  config.dbUrl = process.env.DB_URL || 'DB_URL';
+}
 
 module.exports = config;
