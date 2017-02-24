@@ -1,3 +1,5 @@
+console.log('Zephyr Server starting...')
+
 var config   = require('./config/config');
 var express  = require('express');
 var app      = express();
@@ -12,9 +14,8 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('cookie-session');
-var configDB     = require('./config/database');
 
-mongoose.connect(configDB.url);
+mongoose.connect(config.dbUrl);
 
 require('./config/passport')(passport);
 
@@ -37,4 +38,4 @@ require('./app/routes')(app, passport);
 require('./app/ws')(io);
 
 server.listen(port);
-console.log('Now running on port ' + port);
+console.log('Zephyr Server now running on port ' + port);

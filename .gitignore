@@ -54,3 +54,5 @@ jspm_packages/
 
 # Database
 db/
+
+# Private configuration
