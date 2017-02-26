@@ -56,3 +56,6 @@ jspm_packages/
 db/
 
 # Private configuration
+
+# Formatter
+.jsbeautifyrc
