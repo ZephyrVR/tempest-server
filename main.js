@@ -1,26 +1,26 @@
 console.log('Zephyr Server starting...')
 
-var config   = require('./config/config');
-var express  = require('express');
-var app      = express();
-var server   = require('http').Server(app);
-var io       = require('socket.io')(server);
-var port     = config.port;
+var config = require('./config/config');
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var port = config.port;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
-var morgan       = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('cookie-session');
+var bodyParser = require('body-parser');
+var session = require('cookie-session');
 
 mongoose.connect(config.dbUrl);
 
 require('./config/passport')(passport);
 
 if (config.expressLogging) {
-	app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 app.use(cookieParser());

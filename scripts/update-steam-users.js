@@ -1,6 +1,6 @@
 console.log('Starting to update users from Steam...');
 
-var config   = require('../config/config');
+var config = require('../config/config');
 var mongoose = require('mongoose');
 var request = require('request');
 var Promise = require('promise');
@@ -25,7 +25,8 @@ main().then(function() {
 
 // Used to split `arr` into groups of `chunkSize`
 var createGroupedArray = function(arr, chunkSize) {
-  var groups = [], i;
+  var groups = [],
+    i;
   for (i = 0; i < arr.length; i += chunkSize) {
     groups.push(arr.slice(i, i + chunkSize));
   }
@@ -34,7 +35,7 @@ var createGroupedArray = function(arr, chunkSize) {
 
 // Get all users from the database and split into chunks of 100 before querying Steam
 function main() {
-  return new Promise(function (fulfill, reject) {
+  return new Promise(function(fulfill, reject) {
     User.find({}, function(err, users) {
       if (err) {
         reject(err);
@@ -55,21 +56,21 @@ function main() {
         chunkIds.push(ids);
       });
 
-      Promise.all(chunkIds.map(requestUserData)).then(function (response) {
+      Promise.all(chunkIds.map(requestUserData)).then(function(response) {
         var promises = [];
         var index = 0;
-        
+
         response.forEach(function(res) {
           promises.push(updateUserData(chunks[index], res));
           index++;
         });
 
-        Promise.all(promises).then(function (response) {
+        Promise.all(promises).then(function(response) {
           fulfill();
-        }, function (err) {
+        }, function(err) {
           reject(err);
         });
-      }, function (err) {
+      }, function(err) {
         reject(err);
       });
     });
@@ -78,10 +79,10 @@ function main() {
 
 // Get user data from Steam
 function requestUserData(ids) {
-  return new Promise(function (fulfill, reject) {
+  return new Promise(function(fulfill, reject) {
     var url = STEAM_ENDPOINT + '?key=' + config.steamApiKey + '&steamids=' + ids;
 
-    request(url, function (error, response, body) {
+    request(url, function(error, response, body) {
       if (error) {
         reject(error);
       } else {
@@ -93,7 +94,7 @@ function requestUserData(ids) {
 
 // Update user data from the Steam results
 function updateUserData(users, queryResult) {
-  return new Promise(function (fulfill, reject) {
+  return new Promise(function(fulfill, reject) {
     var index = 0;
     users.forEach(function(user) {
       if (user.steam.id != queryResult[index].steamid) {
