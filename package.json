@@ -12,7 +12,11 @@
   "bugs": {
     "url": "https://github.com/ZephyrVR/server/issues"
   },
-  "main": "server.js",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "update-users": "node ./scripts/update-steam-users.js"
+  },
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",
@@ -27,6 +31,8 @@
     "morgan": "~1.0.0",
     "passport": "^0.3.2",
     "passport-steam": "^1.0.7",
+    "promise": "^7.1.1",
+    "request": "^2.79.0",
     "socket.io": "^1.7.2",
     "socketio-jwt": "^4.5.0",
     "uuid": "^3.0.1"
