@@ -7,5 +7,6 @@ fi
 
 # If on dev and not a pull request, deploy to dev
 if [ "$TRAVIS_BRANCH" = "dev" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-  gcloud compute ssh $GCLOUD_INSTANCE --zone $GCLOUD_ZONE -- "pwd"
+  gcloud compute ssh $GCLOUD_INSTANCE --zone $GCLOUD_ZONE
+  echo "pwd"
 fi
