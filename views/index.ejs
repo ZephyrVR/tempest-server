@@ -47,7 +47,10 @@
 
     <div class="text-center">
         <h1 class="title">Zephyr</h1>
-        <h3 class="subtitle">&beta;</h3>
+
+        <% if (environment == 'development') { %>
+            <h3 class="subtitle">Dev</h3>
+        <% } %>
 
         <a href="/auth/steam"><img class="steam-btn" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"></a>
     </div>
