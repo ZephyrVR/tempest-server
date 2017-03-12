@@ -10,4 +10,4 @@ if [ "$TRAVIS_BRANCH" = "dev" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
   gcloud compute ssh $GCLOUD_INSTANCE --zone $GCLOUD_ZONE --command "./deploy-dev.sh"
 fi
 
-gcloud compute instances remove-metadata $GCLOUD_INSTANCE --keys ssh-keys
+gcloud compute instances remove-metadata $GCLOUD_INSTANCE --zone $GCLOUD_ZONE --keys ssh-keys
