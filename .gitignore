@@ -55,8 +55,10 @@ jspm_packages/
 # Database
 db/
 
-# Private configuration
+# Private configuration and keys
 config-private.js
+client-secret.json
+credentials.tar.gz
 
 # Formatter
 .jsbeautifyrc
