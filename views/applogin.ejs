@@ -33,7 +33,7 @@
 <body>
 <div class="container">
 
-    <h1 class="zephyr">Zephyr <small>&beta;</small></h1>
+    <h1 class="zephyr">Zephyr <% if (environment == 'development') { %> <small>Dev</small> <% } %></h1>
 
     <h3><%= name %> would like to login to <span class="zephyr">Zephyr</span>.</h3>
 

@@ -12,7 +12,8 @@ module.exports = function(app, passport) {
   app.get('/', requireLogout, function(req, res) {
     res.render('index.ejs', {
       infoMsgs: req.flash('info'),
-      errorMsgs: req.flash('error')
+      errorMsgs: req.flash('error'),
+      environment: config.environment
     });
   });
 
@@ -30,13 +31,15 @@ module.exports = function(app, passport) {
 
       if (!app) {
         res.status(400).render('apierror.ejs', {
-          error: 'Invalid App ID'
+          error: 'Invalid App ID',
+          environment: config.environment
         });
       } else {
         res.render('applogin.ejs', {
           id: app.publicId,
           name: app.name,
-          type: app.type
+          type: app.type,
+          environment: config.environment
         });
       }
     });
@@ -58,7 +61,8 @@ module.exports = function(app, passport) {
 
       if (!app) {
         res.status(400).render('apierror.ejs', {
-          error: 'Invalid App ID'
+          error: 'Invalid App ID',
+          environment: config.environment
         });
       } else {
         Token.findOne({ 'app': app._id, 'user': req.user._id }, function(err, token) {
@@ -209,7 +213,8 @@ module.exports = function(app, passport) {
   app.use(function(req, res) {
     res.status(404).render('error.ejs', {
       code: '404',
-      message: 'Looks like you\'re lost.'
+      message: 'Looks like you\'re lost.',
+      environment: config.environment
     });
   });
 };
@@ -237,7 +242,8 @@ function requireApiLogin(req, res, next) {
     return next();
 
   res.status(401).render('apierror.ejs', {
-    error: "User not logged in"
+    error: 'User not logged in',
+    environment: config.environment
   });
 }
 
@@ -246,7 +252,8 @@ function requireApiKey(req, res, next) {
   var apiKey = req.headers.authorization;
   if (!apiKey) {
     res.status(401).render('apierror.ejs', {
-      error: 'Missing API key'
+      error: 'Missing API key',
+      environment: config.environment
     });
   } else {
     App.findOne({ 'apiKey': apiKey }, function(err, app) {
@@ -255,7 +262,8 @@ function requireApiKey(req, res, next) {
 
       if (!app || app.publicId != req.params['id']) {
         res.status(401).render('apierror.ejs', {
-          error: 'Invalid API key'
+          error: 'Invalid API key',
+          environment: config.environment
         });
       } else {
         next();
