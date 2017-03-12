@@ -8,7 +8,8 @@ node_js:
 
 cache:
   directories:
-  - node_modules
+    - node_modules
+    - "$HOME/google-cloud-sdk/"
 
 notifications:
   email: false
@@ -27,5 +28,6 @@ after_success:
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com | bash; fi
   - source /home/travis/google-cloud-sdk/path.bash.inc
   - tar -xzf credentials.tar.gz
+  - gcloud version
   - bash ./scripts/gcloud-auth.sh
   - bash ./scripts/gcloud-deploy.sh
