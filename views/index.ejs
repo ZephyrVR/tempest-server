@@ -28,13 +28,12 @@
     <title>Zephyr</title>
     <link href='//fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="//cdn.muicss.com/mui-0.6.0/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/landing-styles.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-
+    <div class="container alert-container">
     <% if (infoMsgs.length > 0) { %>
         <div class="alert alert-info" id="info-alert">
             <%= infoMsgs %>
@@ -46,27 +45,43 @@
             <%= errorMsgs %>
         </div>
     <% } %>
-
-    <div class="text-center">
-        <h1 class="title">Zephyr</h1>
-
-        <% if (environment == 'development') { %>
-            <h3 class="subtitle">Dev</h3>
-        <% } %>
-
-        <a href="/auth/steam"><img class="steam-btn" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"></a>
     </div>
 
-</div>
+    <div class="content">
+        <div class="content-container">
+            <img class="hero-img" src="img/icon.png"/>
+        </div>
+        <div class="content-container">
+            <div class="title lobster">Zephyr</div>
+            <% if (environment == 'development') { %>
+                <div class="subtitle">Development mode</div>
+            <% } else { %>
+                <div class="subtitle">Mirror Android notifications to VR.</div>
+            <% } %>
+            <a class="mui-btn mui-btn--raised client-btn" href="https://github.com/ThomasGaubert/zephyr/releases/latest">Desktop Client</a>
+            <a class="mui-btn mui-btn--raised client-btn" href="https://play.google.com/store/apps/details?id=com.texasgamer.zephyr">Android App</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-login">
+            <a href="/auth/steam"><img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png"></a>
+        </div>
+        <div class="footer-links">
+            <a href="http://github.com/ZephyrVR">GitHub</a> &middot; 
+            <a href="http://gaubert.io">Thomas Gaubert</a>
+        </div>
+    </div>
 </body>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="//cdn.muicss.com/mui-0.6.0/js/mui.min.js"></script>
 <script>
-$("#info-alert").fadeTo(2000, 500).slideUp(500, function(){
+$("#info-alert").fadeTo(2000, 500).slideUp(500, function() {
     $("#info-alert").slideUp(500);
 });
 
-$("#error-alert").fadeTo(2000, 500).slideUp(500, function(){
+$("#error-alert").fadeTo(2000, 500).slideUp(500, function() {
     $("#error-alert").slideUp(500);
 });
 </script>
