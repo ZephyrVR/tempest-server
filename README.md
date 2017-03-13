@@ -15,7 +15,7 @@ First, download dependencies by running `npm install`.
 There are a couple of options to configure Zephyr Server depending on your preference.
 
 #### Environment variables
-You can set the following environment variables before execution to configure the utility:
+You can set the following environment variables before execution to configure the server:
 
  * `NODE_ENV` - `production` or `development`
  * `PORT` - port by which to access Zephyr Server
