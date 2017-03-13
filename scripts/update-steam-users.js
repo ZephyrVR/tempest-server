@@ -6,6 +6,8 @@ var request = require('request');
 var Promise = require('promise');
 var User = require('../app/models/user');
 
+mongoose.Promise = global.Promise;
+
 var userCount = 0;
 
 // See: https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0002.29
@@ -96,24 +98,35 @@ function requestUserData(ids) {
 function updateUserData(users, queryResult) {
   return new Promise(function(fulfill, reject) {
     var index = 0;
+    var usersToSave = [];
+
     users.forEach(function(user) {
       if (user.steam.id != queryResult[index].steamid) {
         reject('Mismatched Steam IDs (' + user.steam.id + ' != ' + queryResult[index].steamid + ')');
       }
 
+      if (user.steam.name == queryResult[index].personaname && user.steam.avatar == queryResult[index].avatarfull) {
+        console.log('No changes for ' + user.steam.id + ' detected.');
+        index++;
+        return;
+      }
+
       console.log('Updating ' + user.steam.id);
 
-      user.steam.name = queryResult.personaname;
-      user.steam.avatar = queryResult.avatarfull;
+      user.steam.name = queryResult[index].personaname;
+      user.steam.avatar = queryResult[index].avatarfull;
 
-      user.save(function(err) {
-        if (err) reject(err);
-      });
+      usersToSave.push(user.save());
 
       userCount++;
       index++;
     });
 
-    fulfill(users);
+    // Wait for save operations to complete before continuing
+    Promise.all(usersToSave).then(function(resultSaves) {
+        fulfill(users);
+      }).catch(function(err) {
+          reject(err);
+      });
   });
 }
