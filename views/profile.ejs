@@ -36,31 +36,31 @@
 </head>
 <body>
     <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="navbar-brand zephyr">Zephyr</a>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand zephyr">Zephyr</a>
+            </div>
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#"><img class="navbar-profile" src="<%= user.steam.avatar %>"><%= user.steam.name %></a></li>
+                    <li><a href="/help">Help</a></li>
+                    <li><a href="/developer">Developer</a></li>
+                    <% if (user.admin) { %>
+                        <li><a href="/admin">Admin</a></li>
+                    <% } %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
         </div>
-        <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><img class="navbar-profile" src="<%= user.steam.avatar %>"><%= user.steam.name %></a></li>
-                <li><a href="/help">Help</a></li>
-                <li><a href="/developer">Developer</a></li>
-                <% if (user.admin) { %>
-                    <li><a href="/admin">Admin</a></li>
-                <% } %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container">
 

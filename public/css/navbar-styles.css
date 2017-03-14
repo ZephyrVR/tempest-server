@@ -10,6 +10,10 @@
   font-weight: normal;
 }
 
+.navbar-default .navbar-brand:focus {
+  color: #FFFFFF;
+}
+
 .navbar-default .navbar-brand:hover {
   color: #FFFFFF;
 }
