@@ -1,0 +1,56 @@
+.navbar-default {
+  color: #FFFFFF;
+  background-color: #091B2A;
+  border-color: #091B2A;
+  border-bottom: 1px solid #0D253A;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF;
+  font-weight: normal;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  color: #FFFFFF;
+  background-color: #0D253A;
+  font-weight: normal;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  color: #FFFFFF;
+  background-color: #0D253A;
+  font-weight: normal;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #FFFFFF;
+  border-color: #0D253A;
+  font-weight: normal;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #FFFFFF;
+  border-color: #0D253A;
+  font-weight: normal;
+}
+
+.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
+  border-collapse: collapse !important;
+  background-image: none !important;
+}
+
+.navbar-profile {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
