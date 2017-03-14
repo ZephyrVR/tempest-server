@@ -195,6 +195,12 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('/developer', requireLogin, function(req, res) {
+    res.render('dev.ejs', {
+      user: req.user
+    });
+  });
+
   app.get('/revoke/:id', requireLogin, function(req, res) {
     Token.find({ user: req.user._id, appId: req.params['id'] }).remove(function(err) {
       console.log(err);
