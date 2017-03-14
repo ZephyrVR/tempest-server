@@ -195,8 +195,20 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('/help', requireLogin, function(req, res) {
+    res.render('help.ejs', {
+      user: req.user
+    });
+  });
+
   app.get('/developer', requireLogin, function(req, res) {
     res.render('dev.ejs', {
+      user: req.user
+    });
+  });
+
+  app.get('/admin', requireLogin, requireAdmin, function(req, res) {
+    res.render('admin.ejs', {
       user: req.user
     });
   });
@@ -239,6 +251,15 @@ function requireLogout(req, res, next) {
   if (!req.isAuthenticated())
     return next();
 
+  res.redirect('/profile');
+}
+
+// If not admin, go to profile
+function requireAdmin(req, res, next) {
+  if (req.user.admin)
+    return next();
+
+  req.flash('error', 'You don\'t have permission to view that page.');
   res.redirect('/profile');
 }
 

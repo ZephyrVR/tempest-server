@@ -37,7 +37,6 @@
 <body>
     <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -47,12 +46,14 @@
             </button>
             <a href="#" class="navbar-brand zephyr">Zephyr</a>
         </div>
-        <!-- Collection of nav links and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#"><img class="navbar-profile" src="<%= user.steam.avatar %>"><%= user.steam.name %></a></li>
                 <li><a href="/help">Help</a></li>
                 <li><a href="/developer">Developer</a></li>
+                <% if (user.admin) { %>
+                    <li><a href="/admin">Admin</a></li>
+                <% } %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout">Logout</a></li>
@@ -118,31 +119,11 @@
         </table>
         <% } %>
 
-        <%if (user.admin) { %>
-        <div class="row info-containers">
-            <div class="col-sm-6 info-container">
-                <h3><span class="fa fa-user"></span> Local</h3>
-                <p>
-                    <strong>id</strong>: <%= user._id %><br>
-                    <strong>email</strong>: <%= user.email %><br>
-                    <strong>admin</strong>: <%= user.admin %>
-                </p>
-
-                <%if (user.email == undefined) { %>
-                    Set your email to keep up to date with <span class="zephyr">Zephyr</span>.
-                <% } %>
-            </div>
-
-            <div class="col-sm-6 info-container">
-                <h3><span class="fa fa-steam"></span> Steam</h3>
-                <p>
-                    <strong>id</strong>: <%= user.steam.id %><br>
-                    <strong>name</strong>: <%= user.steam.name %><br>
-                    <strong>avatar</strong>: <%= user.steam.avatar %><br>
-                </p>
-            </div>
-        </div>
-        <% } %>
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="#">Zephyr on Steam</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.texasgamer.zephyr&hl=en">Zephyr on Google Play</a></li>
+        </ul>
     </div>
 </body>
 
