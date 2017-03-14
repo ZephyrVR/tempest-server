@@ -33,10 +33,6 @@ body {
   margin-top: 48px;
 }
 
-.install-info {
-  margin-top: 24px;
-}
-
 .info-containers {
   margin-top: 48px;
 }
@@ -55,4 +51,14 @@ body {
 
 .app-official {
   color: #FFD700;
+}
+
+a {
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+a:hover {
+  font-weight: bold;
+  color: #2962FF;
 }
