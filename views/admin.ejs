@@ -49,10 +49,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="/profile"><img class="navbar-profile" src="<%= user.steam.avatar %>"><%= user.steam.name %></a></li>
                 <li><a href="/help">Help</a></li>
-                <li class="active"><a href="#">Developer</a></li>
-                <% if (user.admin) { %>
-                    <li><a href="/admin">Admin</a></li>
-                <% } %>
+                <li><a href="/developer">Developer</a></li>
+                <li class="active"><a href="/admin">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout">Logout</a></li>
@@ -62,13 +60,28 @@
 </nav>
 
     <div class="container">
-        <div class="text-center">
-            <h1 class="title-sm">Coming Soon</h1>
-            <p class="subtitle">The developer API is under construction.</p>
+        <div class="row info-containers">
+            <div class="col-sm-6 info-container">
+                <h3><span class="fa fa-user"></span> Local</h3>
+                <p>
+                    <strong>id</strong>: <%= user._id %><br>
+                    <strong>email</strong>: <%= user.email %><br>
+                    <strong>admin</strong>: <%= user.admin %>
+                </p>
 
-            <p>Interested in developing an app for <span class="zephyr">Zephyr</span>? Let us know!</p>
+                <%if (user.email == undefined) { %>
+                    Set your email to keep up to date with <span class="zephyr">Zephyr</span>.
+                <% } %>
+            </div>
 
-            <btn class="btn btn-default" onclick="window.open('https://goo.gl/forms/CcClaobNFTkVKsYD3')">Developer Interest Survey</btn>
+            <div class="col-sm-6 info-container">
+                <h3><span class="fa fa-steam"></span> Steam</h3>
+                <p>
+                    <strong>id</strong>: <%= user.steam.id %><br>
+                    <strong>name</strong>: <%= user.steam.name %><br>
+                    <strong>avatar</strong>: <%= user.steam.avatar %><br>
+                </p>
+            </div>
         </div>
     </div>
 </body>

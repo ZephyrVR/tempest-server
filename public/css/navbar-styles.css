@@ -26,6 +26,12 @@
   font-weight: normal;
 }
 
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #FFFFFF;
+  background-color: #0D253A;
+  font-weight: normal;
+}
+
 .navbar-default .navbar-nav > li > a {
   color: #FFFFFF;
   border-color: #0D253A;
@@ -33,6 +39,12 @@
 }
 
 .navbar-default .navbar-nav > li > a:hover {
+  color: #FFFFFF;
+  border-color: #0D253A;
+  font-weight: normal;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
   color: #FFFFFF;
   border-color: #0D253A;
   font-weight: normal;
