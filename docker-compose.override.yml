@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  zephyr-server:
+    environment:
+      DB_URL: mongodb://zephyr-server-db/zephyr
+    command: nodemon -L main.js
+
+  zephyr-server-db:
+    ports:
+      - 27017:27017
