@@ -1,0 +1,28 @@
+version: '2'
+
+volumes:
+  db-data:
+    driver: local
+
+services:
+  zephyr-server:
+    container_name: zephyr-server
+    restart: always
+    build: .
+    image: zephyr-server
+    volumes:
+      - .:/app
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - zephyr-server-db
+    command: npm start
+  
+  zephyr-server-db:
+    container_name: zephyr-server-db
+    restart: always
+    image: mongo
+    volumes:
+      - db-data:/data/db:rw

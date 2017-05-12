@@ -1,7 +1,7 @@
 var fs = require('fs');
 var config = {};
 
-if (fs.existsSync(__dirname + '\\config-private.js')) {
+if (fs.existsSync(__dirname + '/config-private.js')) {
   console.log('Using private configuration file...');
   config = require('./config-private');
 } else {
