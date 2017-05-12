@@ -8,8 +8,10 @@ Zephyr backend, responsible for authentication and notification transport.
 
 ## Installation
 
-### Dependencies
-First, download dependencies by running `npm install`.
+### Docker
+[Docker](https://www.docker.com/) is recommended to get up and running quickly with minimal effort. Run the following to build the Docker images:
+
+`docker-compose up`
 
 ### Configuration
 There are a couple of options to configure Zephyr Server depending on your preference.
@@ -30,3 +32,8 @@ You can set the following environment variables before execution to configure th
 
 #### Config file
 Alternatively, you can configure Zephyr Server by either directly editing the `config.json` file found [here](https://github.com/ZephyrVR/server/blob/master/config/config.js) or by creating a file named `config-private.js` ([see example](https://gist.github.com/ThomasGaubert/6e3d2fffc2669e2d74d10b24cbd84f33)) in the same directory.
+
+### Running
+For development environments, use `docker-compose up`. This will use the settings defined in `docker-compose.override.yml`.
+
+For production environments, use `docker-compose -f docker-compose.yml up`. You can optionally add additional configuration files to override the settings defined in `docker-compose.yml`.
