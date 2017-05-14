@@ -1,4 +1,5 @@
 var config = require('../config/config');
+var cors = require('cors');
 
 var App = require('../app/models/app');
 
@@ -8,14 +9,6 @@ module.exports = function(app, passport) {
   app.get('/auth/steam', passport.authenticate('steam'), require('./routes/empty'));
 
   app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/steam-callback.js'));
-
-  app.get('/api/v2/:id', requireApiKey, require('./routes/api/v2/root'));
-
-  app.get('/api/v2/:id/login', requireApiKey, require('./routes/api/v2/login'), passport.authenticate('steam'));
-
-  app.get('/api/v2/:id/result', requireApiLogin, require('./routes/api/v2/result'));
-
-  app.post('/api/v2/:id/verify', requireApiKeyJson, require('./routes/api/v2/verify'));
 
   app.get('/profile', requireLogin, require('./routes/profile'));
 
@@ -28,6 +21,16 @@ module.exports = function(app, passport) {
   app.get('/revoke/:id', requireLogin, require('./routes/revoke'));
 
   app.get('/logout', require('./routes/logout'));
+
+  // API
+
+  app.get('/api/v2/:id', cors(), requireApiKey, require('./routes/api/v2/root'));
+
+  app.get('/api/v2/:id/login', cors(), requireApiKey, require('./routes/api/v2/login'), passport.authenticate('steam'));
+
+  app.get('/api/v2/:id/result', cors(), requireApiLogin, require('./routes/api/v2/result'));
+
+  app.post('/api/v2/:id/verify', cors(), requireApiKeyJson, require('./routes/api/v2/verify'));
 
   app.use(require('./routes/404'));
 };
