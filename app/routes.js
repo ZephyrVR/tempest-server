@@ -22,6 +22,12 @@ module.exports = function(app, passport) {
 
   app.get('/logout', require('./routes/logout'));
 
+  app.post('/create-app', requireLogin, requireAdmin, require('./routes/create-app'));
+
+  app.get('/edit-app/:id/:action', requireLogin, requireAdmin, require('./routes/edit-app'));
+
+  app.post('/edit-app/:id/:action', requireLogin, requireAdmin, require('./routes/edit-app'));
+
   // API
 
   app.get('/api/v2/:id', cors(), requireApiKey, require('./routes/api/v2/root'));

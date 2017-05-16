@@ -7,6 +7,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var port = config.port;
 var mongoose = require('mongoose');
+var autoIncrement = require('mongoose-auto-increment');
 var passport = require('passport');
 var flash = require('connect-flash');
 
@@ -16,6 +17,7 @@ var bodyParser = require('body-parser');
 var session = require('cookie-session');
 
 mongoose.connect(config.dbUrl);
+autoIncrement.initialize(mongoose.createConnection(config.dbUrl));
 
 require('./config/passport')(passport);
 
@@ -25,6 +27,10 @@ if (config.expressLogging) {
 
 app.use(cookieParser());
 app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.set('view engine', 'ejs');
 

@@ -83,9 +83,209 @@
                 </p>
             </div>
         </div>
+
+        <div class="row info-containers">
+            <h3>Apps <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#create-app-modal"><span class="fa fa-plus"></span> Create App</button></h3>
+            <% if(apps.length == 0) { %>
+                No apps.
+            <% } else { %>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Developer</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0; i < apps.length; i++) {%>
+                    <tr>
+                        <td><%= apps[i].publicId %></td>
+                        <td><span data-toggle="tooltip" data-placement="right" title="<%= apps[i].apiKey %>"><%= apps[i].name %></span></td>
+                        <td><a class="no-bold" href="https://steamcommunity.com/profiles/<%= apps[i].developer.steam.id %>"><%= apps[i].developer.steam.name %></a></td>
+                        <% if (apps[i].type == 0) { %>
+                            <td class="app-unverified"><span class="fa fa-warning" data-toggle="tooltip" data-placement="right" title="Unverified App"></span></td>
+                        <% } else if (apps[i].type == 1) { %>
+                            <td class="app-verified"><span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Verified App"></span></td>
+                        <% } else if (apps[i].type == 2) { %>
+                            <td class="app-official"><span class="fa fa-shield" data-toggle="tooltip" data-placement="right" title="Official App"></span></td>
+                        <% } else if (apps[i].type == 3) { %>
+                            <td><span class="fa fa-power-off" data-toggle="tooltip" data-placement="right" title="Disabled"></span></td>
+                        <% } %>
+                        <td class="col-md-3">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Edit <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a href="/edit-app/<%= apps[i].publicId %>/set-unverified"><span class="fa fa-warning"></span> Unverified</a></li>
+                                <li><a href="/edit-app/<%= apps[i].publicId %>/set-verified"><span class="fa fa-check-circle"></span> Verified</a></li>
+                                <li><a href="/edit-app/<%= apps[i].publicId %>/set-official"><span class="fa fa-shield"></span> Official</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" data-toggle="modal" data-target="#edit-app-modal" data-app-id="<%= apps[i].publicId %>" data-name="<%= apps[i].name %>" data-api-key="<%= apps[i].apiKey %>"><span class="fa fa-pencil"></span> Edit App</a></li>
+                              </ul>
+                            </div>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Danger Zone <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a href="/edit-app/<%= apps[i].publicId %>/disable"><span class="fa fa-power-off"></span> Disable</a></li>
+                                <li><a href="/edit-app/<%= apps[i].publicId %>/delete"><span class="fa fa-trash-o"></span> Delete</a></li>
+                              </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <% } %>
+        </div>
+
+        <div class="row info-containers">
+            <h3>Users</h3>
+            <% if(users.length == 0) { %>
+                No users.
+            <% } else { %>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Admin</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0; i < users.length; i++) { %>
+                    <tr>
+                        <td><%= users[i]._id %></td>
+                        <td><a class="no-bold" href="https://steamcommunity.com/profiles/<%= users[i].steam.id %>"><%= users[i].steam.name %></a></td>
+                        <% if (users[i].admin) { %>
+                            <td><span class="fa fa-check-circle" data-toggle="tooltip" data-placement="right" title="Admin"></span></td>
+                        <% } else { %>
+                            <td></td>
+                        <% } %>
+                        <td>
+                            <% if (user.steam.id == users[i].steam.id) { %>
+                                (You)
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="modal fade" id="create-app-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="create-app-form" class="form-horizontal" action="/create-app" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalLabel">Create App</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputAppName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputAppName" placeholder="Zephyr" name="appName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputApiKey" class="col-sm-2 control-label">API Key</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputApiKey" placeholder="API Key" name="apiKey" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="appType1" class="col-sm-2 control-label">App Type</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                    <input type="radio" name="appType" id="appType1" value="0" required> Unverified
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="appType" id="appType2" value="1" required> Verified
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="appType" id="appType3" value="2" required> Official
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit-app-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="edit-app-form" class="form-horizontal" action="/edit-app" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalLabel">Edit App</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="inputAppName" class="col-sm-2 control-label">ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputAppId" placeholder="ID" name="appName" disabled required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAppName" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputAppName" placeholder="Zephyr" name="appName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputApiKey" class="col-sm-2 control-label">API Key</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputApiKey" placeholder="API Key" name="apiKey" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+
+$('#edit-app-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var appId = button.data('app-id');
+    var appName = button.data('name');
+    var apiKey = button.data('api-key');
+    var modal = $(this);
+
+    modal.find('.modal-title').text('Edit ' + appName);
+    modal.find('#inputAppId').val(appId);
+    modal.find('#inputAppName').val(appName);
+    modal.find('#inputApiKey').val(apiKey);
+
+    $('#edit-app-form').attr('action', '/edit-app/' + appId + '/set-data');
+});
+</script>
 </html>
