@@ -40,7 +40,7 @@
     <h3><%= name %> would like to login to <span class="zephyr">Zephyr</span>.</h3>
 
     <%if (type == 0) { %>
-        <p class="app-unofficial"><span class="fa fa-warning"></span> This app is a 3rd party app which hasn't been verified by the <span class="zephyr">Zephyr</span> team. Proceed with caution.</p>
+        <p class="app-unverified"><span class="fa fa-warning"></span> This app is a 3rd party app which hasn't been verified by the <span class="zephyr">Zephyr</span> team. Proceed with caution.</p>
     <% } else if (type == 1) { %>
         <p class="app-verified"><span class="fa fa-check-circle"></span> This app has been verified by the <span class="zephyr">Zephyr</span> team.</p>
     <% } else if (type == 2) { %>
