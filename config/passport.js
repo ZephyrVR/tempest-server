@@ -1,6 +1,8 @@
+var config = require('./config');
+var configAuth = require('./auth');
+
 var SteamStrategy = require('passport-steam').Strategy;
 var User = require('../app/models/user');
-var configAuth = require('./auth');
 
 module.exports = function(passport) {
 
@@ -37,7 +39,11 @@ module.exports = function(passport) {
           } else {
             var newUser = new User();
 
-            newUser.admin = false;
+            if (config.adminSteamId == profile._json.steamid) {
+              newUser.admin = true;
+            } else {
+              newUser.admin = false;
+            }
 
             newUser.steam.id = profile._json.steamid;
             newUser.steam.name = profile._json.personaname;

@@ -20,6 +20,7 @@ There are a couple of options to configure Zephyr Server depending on your prefe
 You can set the following environment variables before execution to configure the server:
 
  * `NODE_ENV` - `production` or `development`
+ * `ADMIN_STEAM_ID` - Steam ID of user to automatically grant admin permissions
  * `PORT` - port by which to access Zephyr Server
  * `EXPRESS_LOGGING` - toggle Express's request logging
  * `SESSION_SECRET` - session secret
