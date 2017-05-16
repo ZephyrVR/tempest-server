@@ -41,7 +41,7 @@ body {
   word-wrap: break-word;
 }
 
-.app-unofficial {
+.app-unverified {
   color: #FF0000;
 }
 
@@ -61,4 +61,12 @@ a {
 a:hover {
   font-weight: bold;
   color: #2962FF;
+}
+
+.modal {
+  color: black;
+}
+
+.no-bold {
+  font-weight: normal;
 }

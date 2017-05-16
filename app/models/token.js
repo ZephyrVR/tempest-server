@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var tokenSchema = mongoose.Schema({
+var tokenSchema = Schema({
   token: String,
-  app: String,
+  app: { type: Schema.Types.ObjectId, ref: 'App' },
   appId: Number,
-  user: String
+  user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Token', tokenSchema);

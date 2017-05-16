@@ -12,6 +12,9 @@ function loadDefaults() {
   // Environment
   config.environment = process.env.NODE_ENV || 'development';
 
+  // Administration
+  config.adminSteamId = process.env.ADMIN_STEAM_ID || 'ADMIN_STEAM_ID';
+
   // Express
   config.port = process.env.PORT || 8080;
   config.expressLogging = process.env.EXPRESS_LOGGING || false;
