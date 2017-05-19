@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 var Token = require('../../../../app/models/token');
+var User = require('../../../../app/models/user');
 
 module.exports = (req, res) => {
   var t = req.body['token'];
