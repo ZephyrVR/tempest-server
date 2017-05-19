@@ -1,10 +1,11 @@
-var socketioJwt = require("socketio-jwt");
+var config = require('../config/config');
+var socketioJwt = require('socketio-jwt');
 
 var clients = {};
 
 module.exports = function(io) {
   io.sockets.on('connection', socketioJwt.authorize({
-    secret: 'supersecret',
+    secret: config.jwtSecret,
     timeout: 15000 // 15s
   })).on('authenticated', function(socket) {
     console.log(socket.decoded_token.user + ' connected using ' + socket.decoded_token.device);
