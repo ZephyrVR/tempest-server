@@ -4,6 +4,8 @@ Zephyr Server
 [![Build Status](https://travis-ci.org/ZephyrVR/server.svg?branch=master)](https://travis-ci.org/ZephyrVR/server)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ZephyrVR/server/master/LICENSE)
 
+> **NOTE:** This project was part of [Project Tempest](https://github.com/ZephyrVR/documents/blob/master/project-tempest.md) and is no longer actively maintained.
+
 Zephyr backend, responsible for authentication and notification transport.
 
 ## Installation
